@@ -7,6 +7,7 @@ async function generateJoke(req, res, next) {
   }
 }
 async function saveJoke(req, res, next) {
+    console.log(req.body);
   try {
     const result = await JokeService.saveJoke(req.body);
     if (result) {

@@ -46,7 +46,7 @@ const generateJoke = async (prompt) => {
 const saveJoke = async (body) => {
   try {
     const joke = new JokeModel({
-      text: body.joke,
+      text: body.text,
       type: body.type,
     });
     const result = await joke.save();
