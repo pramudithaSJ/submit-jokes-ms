@@ -57,7 +57,55 @@ const saveJoke = async (body) => {
   }
 };
 
+const getJokes = async () => {
+  try {
+    const jokes = await JokeModel.find();
+    return jokes;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const getJokeById = async (id) => {
+  try {
+    const joke = await JokeModel.findById(id);
+    return joke;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const updateJoke = async (id, body) => {
+  try {
+    const joke = await JokeModel.findById(id);
+    joke.text = body.text;
+    joke.type = body.type;
+    const result = await joke.save();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+const deleteJoke = async (id) => {
+  try {
+    const joke = await JokeModel.findById(id);
+    const result = await joke.deleteOne();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports = {
   generateJoke,
   saveJoke,
+  getJokes,
+  getJokeById,
+  updateJoke,
+  deleteJoke,
 };

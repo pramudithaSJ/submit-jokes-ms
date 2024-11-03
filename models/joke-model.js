@@ -1,28 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const jokeSchema = new Schema({
-  text: {
+const jokeSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  type: { type: String, required: true },
+  status: {
     type: String,
-    required: true,
+    enum: ["pending", "approved", "rejected"],
+    default: "pending",
   },
-  type: {
-    type: String,
-    required: true,
-  },
-  isModerated: {
-    type: Boolean,
-    default: false,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-
-  updatedAt: {
-    type: Date,
-    default: Date.now,
-  },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Joke = mongoose.model("Joke", jokeSchema);
