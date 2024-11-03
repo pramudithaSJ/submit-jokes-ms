@@ -1,5 +1,6 @@
 const JokeModel = require("../models/joke-model");
 const axios = require("axios");
+const { text } = require("express");
 const { OpenAI } = require("openai");
 
 const openai = new OpenAI({
@@ -28,7 +29,7 @@ const generateJoke = async (prompt) => {
           type: "object",
           properties: {
             joke: {
-              description: "The joke",  
+              description: "The joke",
               type: "string",
             },
           },
@@ -42,6 +43,21 @@ const generateJoke = async (prompt) => {
   return completion.choices[0].message.content;
 };
 
+const saveJoke = async (body) => {
+  try {
+    const joke = new JokeModel({
+      text: body.joke,
+      type: body.type,
+    });
+    const result = await joke.save();
+    return result;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 module.exports = {
   generateJoke,
+  saveJoke,
 };
