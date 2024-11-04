@@ -47,6 +47,7 @@ async function getJokeById(req, res, next) {
 }
 
 async function updateJoke(req, res, next) {
+  console.log("controller body",req.body);
   try {
     const result = await JokeService.updateJoke(req.params.id, req.body);
     if (result) {

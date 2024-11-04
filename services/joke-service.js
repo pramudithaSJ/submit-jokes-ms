@@ -79,9 +79,12 @@ const getJokeById = async (id) => {
 
 const updateJoke = async (id, body) => {
   try {
+    console.log("service body", body);
     const joke = await JokeModel.findById(id);
     joke.text = body.text;
     joke.type = body.type;
+    joke.status = "approved";
+
     const result = await joke.save();
     return result;
   } catch (error) {
